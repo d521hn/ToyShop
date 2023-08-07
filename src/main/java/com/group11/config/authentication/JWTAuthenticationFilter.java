@@ -16,8 +16,8 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.group11.entity.User;
-import com.group11.service.IUserService;
 import com.group11.service.JWTTokenService;
+import com.group11.service.user.IUserService;
 
 public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	

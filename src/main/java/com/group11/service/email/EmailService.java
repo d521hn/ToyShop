@@ -1,4 +1,4 @@
-package com.group11.service;
+package com.group11.service.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.group11.entity.User;
 import com.group11.repository.RegistrationUserTokenRepository;
 import com.group11.repository.ResetPasswordTokenRepository;
+import com.group11.service.user.IUserService;
 
 @Component
 public class EmailService implements IEmailService {

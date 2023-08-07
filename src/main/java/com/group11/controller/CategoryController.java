@@ -17,51 +17,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group11.dto.product.ProductFormForCreating;
-import com.group11.dto.product.ProductFormForUpdating;
-import com.group11.entity.Product;
-import com.group11.service.product.IProductService;
+import com.group11.dto.category.CategoryFormForCreating;
+import com.group11.dto.category.CategoryFormForUpdating;
+import com.group11.entity.Category;
+import com.group11.service.category.ICategoryService;
 
 @RestController
-@RequestMapping(value = "api/v1/products")
-public class ProductController {
+@RequestMapping(value = "api/v1/categories")
+public class CategoryController {
 	@Autowired
-	private IProductService service;
+	private ICategoryService service;
 
 	@GetMapping()
-	public ResponseEntity<?> getAllProducts(
+	public ResponseEntity<?> getAllCategories(
 			Pageable pageable,
 			@RequestParam(required = false)
 			String search) {
-		Page<Product> entities = service.getAllProducts(pageable, search);
+		Page<Category> entities = service.getAllCategories(pageable, search);
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/id/{id}")
-	public ResponseEntity<?> existsProductById(@PathVariable(name = "id") short id) {
-		return new ResponseEntity<>(service.isProductExistsById(id), HttpStatus.OK);
+	public ResponseEntity<?> existsCategoryById(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.isCategoryExistsById(id), HttpStatus.OK);
 	}
 
+
 	@PostMapping()
-	public ResponseEntity<?> createProduct(@RequestBody ProductFormForCreating form) {
-		service.createProduct(form);
+	public ResponseEntity<?> createCategory(@RequestBody CategoryFormForCreating form) {
+		service.createCategory(form);
 		return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> getProductByID(@PathVariable(name = "id") short id) {
-		return new ResponseEntity<>(service.getProductByID(id), HttpStatus.OK);
+	public ResponseEntity<?> getCategoryByID(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.getCategoryByID(id), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateProduct(@PathVariable(name = "id") short id, @RequestBody ProductFormForUpdating form) {
-		service.updateProduct(id, form);
+	public ResponseEntity<?> updateCategory(@PathVariable(name = "id") short id, @RequestBody CategoryFormForUpdating form) {
+		service.updateCategory(id, form);
 		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/{ids}")
-	public ResponseEntity<?> deleteProducts(@PathVariable(name = "ids") List<Short> ids) {
-		service.deleteProducts(ids);
+	public ResponseEntity<?> deleteCategories(@PathVariable(name = "ids") List<Short> ids) {
+		service.deleteCategories(ids);
 		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
 	}
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group11.dto.UserDTO;
 import com.group11.entity.User;
-import com.group11.service.IUserService;
+import com.group11.service.user.IUserService;
 
 @CrossOrigin("*")
 @RestController

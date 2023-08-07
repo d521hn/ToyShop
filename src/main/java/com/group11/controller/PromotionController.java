@@ -17,51 +17,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group11.dto.product.ProductFormForCreating;
-import com.group11.dto.product.ProductFormForUpdating;
-import com.group11.entity.Product;
-import com.group11.service.product.IProductService;
+import com.group11.dto.promotion.PromotionFormForCreating;
+import com.group11.dto.promotion.PromotionFormForUpdating;
+import com.group11.entity.Promotion;
+import com.group11.service.promotion.IPromotionService;
 
 @RestController
-@RequestMapping(value = "api/v1/products")
-public class ProductController {
+@RequestMapping(value = "api/v1/promotions")
+public class PromotionController {
 	@Autowired
-	private IProductService service;
+	private IPromotionService service;
 
 	@GetMapping()
-	public ResponseEntity<?> getAllProducts(
+	public ResponseEntity<?> getAllPromotions(
 			Pageable pageable,
 			@RequestParam(required = false)
 			String search) {
-		Page<Product> entities = service.getAllProducts(pageable, search);
+		Page<Promotion> entities = service.getAllPromotions(pageable, search);
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/id/{id}")
-	public ResponseEntity<?> existsProductById(@PathVariable(name = "id") short id) {
-		return new ResponseEntity<>(service.isProductExistsById(id), HttpStatus.OK);
+	public ResponseEntity<?> existsPromotionById(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.isPromotionExistsById(id), HttpStatus.OK);
 	}
 
+
 	@PostMapping()
-	public ResponseEntity<?> createProduct(@RequestBody ProductFormForCreating form) {
-		service.createProduct(form);
+	public ResponseEntity<?> createPromotion(@RequestBody PromotionFormForCreating form) {
+		service.createPromotion(form);
 		return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> getProductByID(@PathVariable(name = "id") short id) {
-		return new ResponseEntity<>(service.getProductByID(id), HttpStatus.OK);
+	public ResponseEntity<?> getPromotionByID(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.getPromotionByID(id), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateProduct(@PathVariable(name = "id") short id, @RequestBody ProductFormForUpdating form) {
-		service.updateProduct(id, form);
+	public ResponseEntity<?> updatePromotion(@PathVariable(name = "id") short id, @RequestBody PromotionFormForUpdating form) {
+		service.updatePromotion(id, form);
 		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/{ids}")
-	public ResponseEntity<?> deleteProducts(@PathVariable(name = "ids") List<Short> ids) {
-		service.deleteProducts(ids);
+	public ResponseEntity<?> deletePromotions(@PathVariable(name = "ids") List<Short> ids) {
+		service.deletePromotions(ids);
 		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
 	}
 }

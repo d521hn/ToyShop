@@ -1,4 +1,4 @@
-package com.group11.service;
+package com.group11.service.product;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import com.group11.dto.product.ProductFormForCreating;
 import com.group11.dto.product.ProductFormForUpdating;
 import com.group11.entity.Product;
 import com.group11.repository.IProductRepository;
-import com.group11.specification.ProductSpecificationBuilder;
+import com.group11.specification.product.ProductSpecificationBuilder;
 
 @Service
 public class ProductService implements IProductService {

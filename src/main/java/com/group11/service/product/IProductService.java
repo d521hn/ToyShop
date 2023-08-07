@@ -1,4 +1,4 @@
-package com.group11.service;
+package com.group11.service.product;
 
 import java.util.List;
 

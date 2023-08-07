@@ -1,4 +1,4 @@
-package com.group11.service;
+package com.group11.service.user;
 
 import java.util.UUID;
 

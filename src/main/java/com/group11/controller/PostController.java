@@ -17,51 +17,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group11.dto.product.ProductFormForCreating;
-import com.group11.dto.product.ProductFormForUpdating;
-import com.group11.entity.Product;
-import com.group11.service.product.IProductService;
+import com.group11.dto.post.PostFormForCreating;
+import com.group11.dto.post.PostFormForUpdating;
+import com.group11.entity.Post;
+import com.group11.service.post.IPostService;
 
 @RestController
-@RequestMapping(value = "api/v1/products")
-public class ProductController {
+@RequestMapping(value = "api/v1/posts")
+public class PostController {
 	@Autowired
-	private IProductService service;
+	private IPostService service;
 
 	@GetMapping()
-	public ResponseEntity<?> getAllProducts(
+	public ResponseEntity<?> getAllPosts(
 			Pageable pageable,
 			@RequestParam(required = false)
 			String search) {
-		Page<Product> entities = service.getAllProducts(pageable, search);
+		Page<Post> entities = service.getAllPosts(pageable, search);
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/id/{id}")
-	public ResponseEntity<?> existsProductById(@PathVariable(name = "id") short id) {
-		return new ResponseEntity<>(service.isProductExistsById(id), HttpStatus.OK);
+	public ResponseEntity<?> existsPostById(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.isPostExistsById(id), HttpStatus.OK);
 	}
 
+
 	@PostMapping()
-	public ResponseEntity<?> createProduct(@RequestBody ProductFormForCreating form) {
-		service.createProduct(form);
+	public ResponseEntity<?> createPost(@RequestBody PostFormForCreating form) {
+		service.createPost(form);
 		return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> getProductByID(@PathVariable(name = "id") short id) {
-		return new ResponseEntity<>(service.getProductByID(id), HttpStatus.OK);
+	public ResponseEntity<?> getPostByID(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.getPostByID(id), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateProduct(@PathVariable(name = "id") short id, @RequestBody ProductFormForUpdating form) {
-		service.updateProduct(id, form);
+	public ResponseEntity<?> updatePost(@PathVariable(name = "id") short id, @RequestBody PostFormForUpdating form) {
+		service.updatePost(id, form);
 		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/{ids}")
-	public ResponseEntity<?> deleteProducts(@PathVariable(name = "ids") List<Short> ids) {
-		service.deleteProducts(ids);
+	public ResponseEntity<?> deletePosts(@PathVariable(name = "ids") List<Short> ids) {
+		service.deletePosts(ids);
 		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
 	}
 }

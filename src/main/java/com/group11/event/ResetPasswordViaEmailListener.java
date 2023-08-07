@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import com.group11.service.IEmailService;
+import com.group11.service.email.IEmailService;
 
 @Component
 public class ResetPasswordViaEmailListener implements ApplicationListener<OnResetPasswordViaEmailEvent> {

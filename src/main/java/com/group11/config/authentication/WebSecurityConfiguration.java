@@ -1,7 +1,7 @@
 package com.group11.config.authentication;
 
 import com.google.common.collect.ImmutableList;
-import com.group11.service.IUserService;
+import com.group11.service.user.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,9 @@
-package com.group11.specification;
+package com.group11.specification.product;
 
 import org.springframework.data.jpa.domain.Specification;
 
 import com.group11.entity.Product;
+import com.group11.specification.SearchCriteria;
 
 import org.springframework.util.StringUtils;
 
