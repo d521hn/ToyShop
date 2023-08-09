@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.group11.dto.product.ProductFilter;
 import com.group11.dto.product.ProductFormForCreating;
 import com.group11.dto.product.ProductFormForUpdating;
 import com.group11.entity.Product;
 
 public interface IProductService {
-	Page<Product> getAllProducts(Pageable pageable, String search);
+	Page<Product> getAllProducts(Pageable pageable, ProductFilter filter, String search);
 	
 	boolean isProductExistsById(short id);
 

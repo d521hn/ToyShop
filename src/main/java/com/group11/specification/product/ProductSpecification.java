@@ -21,8 +21,18 @@ public class ProductSpecification  implements Specification<Product> {
 	@Override
 	public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
-		if (criteria.getOperator().equalsIgnoreCase("Like")) {
+		if (criteria.getOperator().equalsIgnoreCase("searchByName")) {
 			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
+		}
+		if (criteria.getOperator().equalsIgnoreCase("filterByBrand")) {
+			return criteriaBuilder.like(root.get("brand").get(criteria.getKey()), "%" + criteria.getValue() + "%");
+		}
+		if (criteria.getOperator().equalsIgnoreCase("filterMinPrice")) {
+			return criteriaBuilder.greaterThanOrEqualTo(root.get(criteria.getKey()), criteria.getValue().toString());
+		}
+
+		if (criteria.getOperator().equalsIgnoreCase("filterMaxPrice")) {
+			return criteriaBuilder.lessThanOrEqualTo(root.get(criteria.getKey()), criteria.getValue().toString());
 		}
 		return null;
 	}

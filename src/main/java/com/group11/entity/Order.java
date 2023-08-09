@@ -46,18 +46,13 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "id", nullable = false)
 	private User user;
-	
-    @OneToMany(mappedBy="order")
-    @JsonManagedReference
-    private List<ProductOrder> items;
 
-	public Order(String orderStatus, String deliAddress, short userId, List<ProductOrder> items) {
+	public Order(String orderStatus, String deliAddress, short userId) {
 		super();
 		this.orderStatus = orderStatus;
 		this.deliAddress = deliAddress;
 		this.user = new User();
 		this.user.setId(userId);
-		this.items = items;
 	}
 	
 	public void setUserId(short userId) {

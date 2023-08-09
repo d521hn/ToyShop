@@ -23,6 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "`Product_Order`")
 public class ProductOrder implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
@@ -33,7 +34,6 @@ public class ProductOrder implements Serializable{
     private Product product;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "orderId", insertable = false, updatable = false)
     private Order order;
 
@@ -42,4 +42,13 @@ public class ProductOrder implements Serializable{
     
 	@Column(name = "`price`", nullable = false)
 	private int price;
+
+	public ProductOrder(short productId, short orderId, int quantity, int price) {
+		this.id =  new ProductOrderId();
+		this.id.setProductId(productId);
+		this.id.setOrderId(orderId);
+		this.quantity = quantity;
+		this.price  = price;
+	}
+	
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group11.dto.product.ProductFilter;
 import com.group11.dto.product.ProductFormForCreating;
 import com.group11.dto.product.ProductFormForUpdating;
 import com.group11.entity.Product;
@@ -31,9 +32,10 @@ public class ProductController {
 	@GetMapping()
 	public ResponseEntity<?> getAllProducts(
 			Pageable pageable,
+			ProductFilter filter,
 			@RequestParam(required = false)
 			String search) {
-		Page<Product> entities = service.getAllProducts(pageable, search);
+		Page<Product> entities = service.getAllProducts(pageable, filter, search);
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 

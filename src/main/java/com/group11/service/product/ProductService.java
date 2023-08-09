@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group11.dto.product.ProductFilter;
 import com.group11.dto.product.ProductFormForCreating;
 import com.group11.dto.product.ProductFormForUpdating;
 import com.group11.entity.Product;
@@ -20,8 +21,8 @@ public class ProductService implements IProductService {
 	private IProductRepository repository;
 	
 	@Override
-	public Page<Product> getAllProducts(Pageable pageable, String search) {
-		ProductSpecificationBuilder specification = new ProductSpecificationBuilder(search);
+	public Page<Product> getAllProducts(Pageable pageable, ProductFilter filter, String search) {
+		ProductSpecificationBuilder specification = new ProductSpecificationBuilder(filter, search);
 
 		return repository.findAll(specification.build(), pageable);
 	}
