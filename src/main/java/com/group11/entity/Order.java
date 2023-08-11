@@ -1,20 +1,23 @@
 package com.group11.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,28 +39,55 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private short id;
-	
-    @Column(name = "`orderStatus`", length = 50)
-    private String orderStatus;
     
-    @Column(name = "`deliveryAddress`", length = 50)
-    private String deliAddress;
+	@OneToOne
+	@JoinColumn(name = "shipId", referencedColumnName = "id", nullable = false)
+	private Shipping ship;
     
 	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "id", nullable = false)
 	private User user;
+	
+    @Column(name = "`orderStatus`", length = 50)
+    private String orderStatus;
+    
+	@Column(name = "createdTime")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Date createdTime;
+	
+	@Column(name = "`paymentMethod`", columnDefinition = "ENUM('COD', 'BANKING', 'MOMO')")
+	@Enumerated(EnumType.STRING)
+	private PaymentMethod paymentMethod;
 
-	public Order(String orderStatus, String deliAddress, short userId) {
-		super();
-		this.orderStatus = orderStatus;
-		this.deliAddress = deliAddress;
-		this.user = new User();
-		this.user.setId(userId);
+	public enum PaymentMethod {
+		COD, BANKING, MOMO;
+		public static PaymentMethod toEnum(String name) {
+			for (PaymentMethod item : PaymentMethod.values()) {
+				if (item.toString().equals(name))
+					return item;
+			}
+			return null;
+		}
 	}
 	
 	public void setUserId(short userId) {
 		this.user = new User();
 		this.user.setId(userId);
+	}
+
+	public void setShipId(short shipId) {
+		this.ship = new Shipping();
+		this.ship.setId(shipId);
+	}
+
+	public Order(short shipId, short userId, String orderStatus, Date createdTime, PaymentMethod paymentMethod) {
+		super();
+		setUserId(userId);
+		setShipId(shipId);
+		this.orderStatus = orderStatus;
+		this.createdTime = createdTime;
+		this.paymentMethod = paymentMethod;
 	}
 
 }

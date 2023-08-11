@@ -22,6 +22,7 @@ public class ProductSpecificationBuilder {
 
 		SearchCriteria searchName = new SearchCriteria("name", "searchByName", search);
 		SearchCriteria brandName = new SearchCriteria("name", "filterByBrand", filter.getBrandName());
+		SearchCriteria ageGroup = new SearchCriteria("ageGroup", "filterByAgeGroup", filter.getAgeGroup());
 		SearchCriteria minPrice = new SearchCriteria("price", "filterMinPrice", filter.getMinPrice());
 		SearchCriteria maxPrice = new SearchCriteria("price", "filterMaxPrice", filter.getMaxPrice());
 
@@ -37,6 +38,10 @@ public class ProductSpecificationBuilder {
 			where = new ProductSpecification(brandName);
 		}
 		
+		// filter age group
+		if (filter.getAgeGroup() != null) {
+			where = new ProductSpecification(ageGroup);
+		}
 		
 		// min price filter
 		if (filter.getMinPrice() != 0) {

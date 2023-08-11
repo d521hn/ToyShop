@@ -15,9 +15,10 @@ public class ProductFormForCreating {
 	String guide;
 	String image;
 	String status;
+	String ageGroup;
 	short quantity;
 	
 	public Product toEntity() {
-		return new Product (name, price, describe, info, guide, image, status, quantity);
+		return new Product (name, price, describe, info, guide, image, status, quantity, ageGroup);
 	}
 }

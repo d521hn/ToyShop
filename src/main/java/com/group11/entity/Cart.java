@@ -36,7 +36,14 @@ public class Cart implements Serializable{
 	@JoinColumn(name = "userId", referencedColumnName = "id", nullable = false)
 	private User user;
 	
-//	@ManyToMany(mappedBy = "carts")
-//	@JsonBackReference
-//	private Set<Product> products;
+	public void setUserId(short userId) {
+		this.user = new User();
+		this.user.setId(userId);
+	}
+	public Cart(short userId) {
+		super();
+		setUserId(userId);
+	}
+	
+	
 }

@@ -24,6 +24,9 @@ public class ProductSpecification  implements Specification<Product> {
 		if (criteria.getOperator().equalsIgnoreCase("searchByName")) {
 			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
 		}
+		if (criteria.getOperator().equalsIgnoreCase("filterByAgeGroup")) {
+			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
+		}
 		if (criteria.getOperator().equalsIgnoreCase("filterByBrand")) {
 			return criteriaBuilder.like(root.get("brand").get(criteria.getKey()), "%" + criteria.getValue() + "%");
 		}

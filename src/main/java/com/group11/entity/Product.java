@@ -62,6 +62,9 @@ public class Product implements Serializable{
 	@Column(name = "`quantity`", nullable = false)
 	private short quantity;
 	
+    @Column(name = "`ageGroup`", length = 50)
+    private String ageGroup;
+	
 	@ManyToOne
 	@JoinColumn(name = "cateId", referencedColumnName = "id", nullable = false)
 	private Category cate;
@@ -75,7 +78,7 @@ public class Product implements Serializable{
 	private Promotion promotion;
 
 	public Product(String name, int price, String describe, String info, String guide, String image, String status,
-			short quantity) {
+			short quantity, String ageGroup) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -85,6 +88,7 @@ public class Product implements Serializable{
 		this.image = image;
 		this.status = status;
 		this.quantity = quantity;
+		this.ageGroup = ageGroup;
 	}
 	
 }

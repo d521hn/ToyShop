@@ -11,4 +11,5 @@ public class ProductFilter {
 	private int minPrice;
 	private int maxPrice;
 	private String brandName;
+	private String ageGroup;
 }

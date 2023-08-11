@@ -36,5 +36,4 @@ public class Brand implements Serializable{
 		this.name = name;
 	}
     
-    
 }

@@ -52,6 +52,7 @@ public class ProductService implements IProductService {
 		entity.setPrice(form.getPrice());
 		entity.setImage(form.getImage());
 		entity.setStatus(form.getStatus());
+		entity.setAgeGroup(form.getAgeGroup());
 		entity.setQuantity(form.getQuantity());
 		repository.save(entity);
 	}

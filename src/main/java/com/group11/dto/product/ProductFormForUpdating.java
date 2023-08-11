@@ -13,5 +13,6 @@ public class ProductFormForUpdating {
 	String guide;
 	String image;
 	String status;
+	String ageGroup;
 	short quantity;
 }
