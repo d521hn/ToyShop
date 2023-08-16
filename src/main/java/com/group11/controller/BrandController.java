@@ -53,6 +53,11 @@ public class BrandController {
 	public ResponseEntity<?> getBrandByID(@PathVariable(name = "id") short id) {
 		return new ResponseEntity<>(service.getBrandByID(id), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/name/{name}")
+	public ResponseEntity<?> existsBrandByName(@PathVariable(name = "name") String name) {
+		return new ResponseEntity<>(service.isBrandExistsByName(name), HttpStatus.OK);
+	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> updateBrand(@PathVariable(name = "id") short id, @RequestBody BrandFormForUpdating form) {

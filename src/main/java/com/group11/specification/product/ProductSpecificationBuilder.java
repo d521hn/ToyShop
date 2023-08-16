@@ -1,5 +1,8 @@
 package com.group11.specification.product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import com.group11.dto.product.ProductFilter;
@@ -17,50 +20,41 @@ public class ProductSpecificationBuilder {
 		this.search = search;
 	}
 
-	@SuppressWarnings("deprecation")
 	public Specification<Product> build() {
+	    Specification<Product> where = Specification.where(null);
 
-		SearchCriteria searchName = new SearchCriteria("name", "searchByName", search);
-		SearchCriteria brandName = new SearchCriteria("name", "filterByBrand", filter.getBrandName());
-		SearchCriteria ageGroup = new SearchCriteria("ageGroup", "filterByAgeGroup", filter.getAgeGroup());
-		SearchCriteria minPrice = new SearchCriteria("price", "filterMinPrice", filter.getMinPrice());
-		SearchCriteria maxPrice = new SearchCriteria("price", "filterMaxPrice", filter.getMaxPrice());
+	    if (!StringUtils.isEmpty(search)) {
+	        SearchCriteria searchName = new SearchCriteria("name", "searchByName", search);
+	        where = where.and(new ProductSpecification(searchName));
+	    }
 
-		Specification<Product> where = null;
+	    if (filter.getBrandNames() != null && !filter.getBrandNames().isEmpty()) {
+	        List<SearchCriteria> brandCriterias = filter.getBrandNames().stream()
+	                .map(brandName -> new SearchCriteria("name", "filterByBrand", brandName))
+	                .collect(Collectors.toList());
 
-		// search
-		if (!StringUtils.isEmpty(search)) {
-			where = new ProductSpecification(searchName);
-		}
-		
-		// filter brandName
-		if (filter.getBrandName() != null) {
-			where = new ProductSpecification(brandName);
-		}
-		
-		// filter age group
-		if (filter.getAgeGroup() != null) {
-			where = new ProductSpecification(ageGroup);
-		}
-		
-		// min price filter
-		if (filter.getMinPrice() != 0) {
-			if (where != null) {
-				where = where.and(new ProductSpecification(minPrice));
-			} else {
-				where = new ProductSpecification(minPrice);
-			}
-		}
+	        for (SearchCriteria brandCriteria : brandCriterias) {
+	            where = where.or(new ProductSpecification(brandCriteria));
+	        }
+	    }
 
-		// max price filter
-		if (filter.getMaxPrice() != 0) {
-			if (where != null) {
-				where = where.and(new ProductSpecification(maxPrice));
-			} else {
-				where = new ProductSpecification(maxPrice);
-			}
-		}
+	    if (filter.getAgeGroup() != null) {
+	        SearchCriteria ageGroup = new SearchCriteria("ageGroup", "filterByAgeGroup", filter.getAgeGroup());
+	        where = where.and(new ProductSpecification(ageGroup));
+	    }
 
-		return where;
+	    if (filter.getMinPrice() != 0) {
+	        SearchCriteria minPrice = new SearchCriteria("price", "filterMinPrice", filter.getMinPrice());
+	        where = where.and(new ProductSpecification(minPrice));
+	    }
+
+	    if (filter.getMaxPrice() != 0) {
+	        SearchCriteria maxPrice = new SearchCriteria("price", "filterMaxPrice", filter.getMaxPrice());
+	        where = where.and(new ProductSpecification(maxPrice));
+	    }
+
+	    return where;
 	}
+
+
 }

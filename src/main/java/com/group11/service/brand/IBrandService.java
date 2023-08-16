@@ -13,6 +13,8 @@ public interface IBrandService {
 	Page<Brand> getAllBrands(Pageable pageable, String search);
 	
 	boolean isBrandExistsById(short id);
+	
+	boolean isBrandExistsByName(String name);
 
 	void createBrand(BrandFormForCreating form);
 

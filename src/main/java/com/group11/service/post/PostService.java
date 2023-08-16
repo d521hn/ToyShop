@@ -30,6 +30,11 @@ public class PostService implements IPostService {
 	public boolean isPostExistsById(short id) {
 		return repository.existsById(id);
 	}
+	
+	@Override
+	public boolean isPostExistsByTitle(String title) {
+		return repository.existsByTitle(title);
+	}
 
 	@Override
 	public void createPost(PostFormForCreating form) {

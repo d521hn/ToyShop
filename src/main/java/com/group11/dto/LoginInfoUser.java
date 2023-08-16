@@ -1,10 +1,5 @@
 package com.group11.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class LoginInfoUser {
 
 	private String token;
@@ -30,6 +25,34 @@ public class LoginInfoUser {
 		this.lastName = lastName;
 		this.role = role;
 		this.status = status;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 
 }

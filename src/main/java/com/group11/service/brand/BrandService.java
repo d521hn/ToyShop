@@ -30,6 +30,11 @@ public class BrandService implements IBrandService {
 	public boolean isBrandExistsById(short id) {
 		return repository.existsById(id);
 	}
+	
+	@Override
+	public boolean isBrandExistsByName(String name) {
+		return repository.existsByName(name);
+	}
 
 	@Override
 	public void createBrand(BrandFormForCreating form) {

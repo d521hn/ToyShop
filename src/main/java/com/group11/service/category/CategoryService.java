@@ -30,6 +30,11 @@ public class CategoryService implements ICategoryService {
 	public boolean isCategoryExistsById(short id) {
 		return repository.existsById(id);
 	}
+	
+	@Override
+	public boolean isCategoryExistsByName(String name) {
+		return repository.existsByName(name);
+	}
 
 	@Override
 	public void createCategory(CategoryFormForCreating form) {

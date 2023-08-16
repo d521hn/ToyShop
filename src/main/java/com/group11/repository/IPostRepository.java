@@ -12,5 +12,6 @@ public interface IPostRepository extends JpaRepository<Post, Short>, JpaSpecific
 
 	public boolean existsByTitle(String title);
 
+
 	public void deleteByIdIn(List<Short> ids);
 }

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+//import com.group11.dto.ChangePublicProfileDTO;
 import com.group11.entity.RegistrationUserToken;
 import com.group11.entity.ResetPasswordToken;
 import com.group11.entity.User;
@@ -163,5 +164,14 @@ public class UserService implements IUserService {
 				AuthorityUtils.createAuthorityList(user.getRole()));
 	}
 
+//	@Override
+//	public void changeUserProfile(String username, ChangePublicProfileDTO dto) {
+//		User user = userRepository.findByUserName(username);
+//		
+//		user.setAvatar(dto.getAvatarUrl());
+//		userRepository.save(user);
+//		
+//		// TODO other field
+//	}
 
 }

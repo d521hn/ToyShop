@@ -41,6 +41,11 @@ public class CategoryController {
 	public ResponseEntity<?> existsCategoryById(@PathVariable(name = "id") short id) {
 		return new ResponseEntity<>(service.isCategoryExistsById(id), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/name/{name}")
+	public ResponseEntity<?> existsCategoryByName(@PathVariable(name = "name") String name) {
+		return new ResponseEntity<>(service.isCategoryExistsByName(name), HttpStatus.OK);
+	}
 
 
 	@PostMapping()

@@ -13,6 +13,8 @@ public interface IPostService {
 	Page<Post> getAllPosts(Pageable pageable, String search);
 	
 	boolean isPostExistsById(short id);
+	
+	boolean isPostExistsByTitle(String title);
 
 	void createPost(PostFormForCreating form);
 

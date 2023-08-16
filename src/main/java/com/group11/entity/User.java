@@ -1,6 +1,8 @@
 package com.group11.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 
 
 import javax.persistence.*;
@@ -8,6 +10,9 @@ import javax.persistence.*;
 import org.hibernate.annotations.Formula;
 
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import lombok.Getter;
+//import lombok.Setter;
 
 @Data
 @Entity
@@ -41,6 +46,12 @@ public class User implements Serializable {
 	@Column(name = "`address`", length = 50)
 	private String address;
 
+	@Column(name = "`phoneNumber`", length = 20)
+	private String phoneNumber;
+
+	@Column(name = "`avatar`", length = 200)
+	private String avatar;
+
 	@Column(name = "`role`", columnDefinition = "ENUM('ADMIN', 'EMPLOYEE', 'CUSTOMER')")
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -63,17 +74,20 @@ public class User implements Serializable {
 	@PrePersist
 	public void prePersist() {
 		if (role == null) {
-			role = Role.ADMIN;
+			role = Role.CUSTOMER;
 		}
 	}
 
+//	@Column(name = "`supervisor_id`", nullable = true)
+//	private short supervisor_id;
 
-	public User(String userName, String email, String password, String firstName, String lastName) {
+	public User(String userName, String email, String password, String firstName, String lastName, String phoneNumber) {
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public User() {

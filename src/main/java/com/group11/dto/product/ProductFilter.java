@@ -1,5 +1,7 @@
 package com.group11.dto.product;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +12,6 @@ import lombok.Setter;
 public class ProductFilter {
 	private int minPrice;
 	private int maxPrice;
-	private String brandName;
+	private List<String> brandNames;
 	private String ageGroup;
 }

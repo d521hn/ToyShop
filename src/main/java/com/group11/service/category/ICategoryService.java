@@ -13,6 +13,8 @@ public interface ICategoryService {
 	Page<Category> getAllCategories(Pageable pageable, String search);
 	
 	boolean isCategoryExistsById(short id);
+	
+	boolean isCategoryExistsByName(String name);
 
 	void createCategory(CategoryFormForCreating form);
 

@@ -41,7 +41,11 @@ public class PostController {
 	public ResponseEntity<?> existsPostById(@PathVariable(name = "id") short id) {
 		return new ResponseEntity<>(service.isPostExistsById(id), HttpStatus.OK);
 	}
-
+	
+	@GetMapping(value = "/name/{name}")
+	public ResponseEntity<?> existsPostByTitle(@PathVariable(name = "name") String name) {
+		return new ResponseEntity<>(service.isPostExistsByTitle(name), HttpStatus.OK);
+	}
 
 	@PostMapping()
 	public ResponseEntity<?> createPost(@RequestBody PostFormForCreating form) {
