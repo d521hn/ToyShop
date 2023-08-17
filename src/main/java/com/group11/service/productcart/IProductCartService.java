@@ -8,7 +8,11 @@ import com.group11.entity.ProductCart;
 import com.group11.entity.ProductCartId;
 
 public interface IProductCartService {
+	
 	List<ProductCart> getAllProductCarts();
+	
+	List<ProductCart> getProductCartsByCartId(short cartId);
+	
 	void createProductCart(ProductCartFormForCreating form);
 	
 	void updateProductCart(short productId, short cartId, ProductCartFormForUpdating form);

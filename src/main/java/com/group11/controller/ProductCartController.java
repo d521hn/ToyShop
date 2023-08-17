@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group11.dto.productcart.ProductCartFormForCreating;
 import com.group11.dto.productcart.ProductCartFormForUpdating;
 import com.group11.entity.ProductCart;
+import com.group11.repository.IProductCartRepository;
 import com.group11.service.productcart.IProductCartService;
 @RestController
 @RequestMapping(value = "api/v1/productcarts")
@@ -30,6 +31,14 @@ public class ProductCartController {
 		List<ProductCart> entities = service.getAllProductCarts();
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/cartId/{cartId}")
+	public ResponseEntity<?> getProductCartsByCartId(@PathVariable(name = "cartId") short cartId) {
+		List<ProductCart> entities = service.getProductCartsByCartId(cartId);
+		return new ResponseEntity<>(entities, HttpStatus.OK);
+	}
+
+	
 	
 	@PostMapping()
 	public ResponseEntity<?> createProductCart(@RequestBody ProductCartFormForCreating form) {

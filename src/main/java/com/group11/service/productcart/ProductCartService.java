@@ -23,6 +23,11 @@ public class ProductCartService implements IProductCartService{
 	@Override
 	public List<ProductCart> getAllProductCarts() {
 		return repository.findAll();
+	} 
+	
+	@Override
+	public List<ProductCart> getProductCartsByCartId(short cartId) {
+		return repository.findByCartId(cartId);
 	}
 	
 	@Override
