@@ -42,7 +42,6 @@ public class CartController {
 		return new ResponseEntity<>(service.isCartExistsById(id), HttpStatus.OK);
 	}
 
-
 	@PostMapping()
 	public ResponseEntity<?> createCart(@RequestBody CartFormForCreating form) {
 		service.createCart(form);
@@ -52,6 +51,11 @@ public class CartController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> getCartByID(@PathVariable(name = "id") short id) {
 		return new ResponseEntity<>(service.getCartByID(id), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/user/{id}")
+	public ResponseEntity<?> getCartByUserId(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.getCartByUserId(id), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/{id}")

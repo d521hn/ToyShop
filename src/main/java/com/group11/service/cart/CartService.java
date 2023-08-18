@@ -40,6 +40,11 @@ public class CartService implements ICartService {
 	public Cart getCartByID(short id) {
 		return repository.findById(id).get();
 	}
+	
+	@Override
+	public Cart getCartByUserId(short id) {
+		return repository.findByUserId(id);
+	}
 
 	@Override
 	public void updateCart(short id, CartFormForUpdating form) {
