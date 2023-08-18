@@ -37,8 +37,6 @@ public class ProductCartController {
 		List<ProductCart> entities = service.getProductCartsByCartId(cartId);
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
-
-	
 	
 	@PostMapping()
 	public ResponseEntity<?> createProductCart(@RequestBody ProductCartFormForCreating form) {
