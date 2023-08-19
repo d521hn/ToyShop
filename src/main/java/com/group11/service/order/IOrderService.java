@@ -17,6 +17,8 @@ public interface IOrderService {
 	void createOrder(OrderFormForCreating form);
 
 	Order getOrderByID(short id);
+	
+	List<Order> getOrderByShipId(short id);
 
 	void updateOrder(short id, OrderFormForUpdating form);
 

@@ -51,6 +51,9 @@ public class Order implements Serializable{
     @Column(name = "`orderStatus`", length = 50)
     private String orderStatus;
     
+    @Column(name = "`paymentStatus`", length = 50)
+    private String paymentStatus;
+    
 	@Column(name = "createdTime")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
@@ -81,13 +84,14 @@ public class Order implements Serializable{
 		this.ship.setId(shipId);
 	}
 
-	public Order(short shipId, short userId, String orderStatus, Date createdTime, PaymentMethod paymentMethod) {
+	public Order(short shipId, short userId, String orderStatus, Date createdTime, PaymentMethod paymentMethod, String paymentStatus) {
 		super();
 		setUserId(userId);
 		setShipId(shipId);
 		this.orderStatus = orderStatus;
 		this.createdTime = createdTime;
 		this.paymentMethod = paymentMethod;
+		this.paymentStatus = paymentStatus;
 	}
 
 }

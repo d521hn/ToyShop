@@ -23,6 +23,11 @@ public class ProductOrderService implements IProductOrderService{
 	}
 	
 	@Override
+	public List<ProductOrder> geProductOrderByOrderId(short id) {
+		return repository.findByOrderId(id);
+	}
+	
+	@Override
 	public void createProductOrder(ProductOrderFormForCreating form) {
 		repository.save(form.toEntity());
 	}

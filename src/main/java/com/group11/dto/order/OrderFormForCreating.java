@@ -16,9 +16,10 @@ public class OrderFormForCreating {
 	String orderStatus;
 	Date createdTime;
 	PaymentMethod paymentMethod;
+	String paymentStatus;
 	
 	
 	public Order toEntity() {
-		return new Order (userId, shipId, orderStatus, createdTime, paymentMethod);
+		return new Order (userId, shipId, orderStatus, createdTime, paymentMethod, paymentStatus);
 	}
 }

@@ -40,6 +40,11 @@ public class OrderService implements IOrderService {
 	public Order getOrderByID(short id) {
 		return repository.findById(id).get();
 	}
+	
+	@Override
+	public List<Order> getOrderByShipId(short shipId) {
+		return repository.getByShipId(shipId);
+	}
 
 	@Override
 	public void updateOrder(short id, OrderFormForUpdating form) {

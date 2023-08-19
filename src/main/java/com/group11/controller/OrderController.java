@@ -53,6 +53,11 @@ public class OrderController {
 	public ResponseEntity<?> getOrderByID(@PathVariable(name = "id") short id) {
 		return new ResponseEntity<>(service.getOrderByID(id), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/ship/{id}")
+	public ResponseEntity<?> getOrderByShipId(@PathVariable(name = "id") short id) {
+		return new ResponseEntity<>(service.getOrderByShipId(id), HttpStatus.OK);
+	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> updateOrder(@PathVariable(name = "id") short id, @RequestBody OrderFormForUpdating form) {
