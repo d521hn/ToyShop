@@ -59,12 +59,12 @@ public class Order implements Serializable{
 	@CreationTimestamp
 	private Date createdTime;
 	
-	@Column(name = "`paymentMethod`", columnDefinition = "ENUM('COD', 'BANKING', 'MOMO')")
+	@Column(name = "`paymentMethod`", columnDefinition = "ENUM('COD', 'BANKING', 'VNPAY')")
 	@Enumerated(EnumType.STRING)
 	private PaymentMethod paymentMethod;
 
 	public enum PaymentMethod {
-		COD, BANKING, MOMO;
+		COD, BANKING, VNPAY;
 		public static PaymentMethod toEnum(String name) {
 			for (PaymentMethod item : PaymentMethod.values()) {
 				if (item.toString().equals(name))

@@ -16,7 +16,7 @@ public class OrderSpecificationBuilder {
 	@SuppressWarnings("deprecation")
 	public Specification<Order> build() {
 
-		SearchCriteria seachCriteria = new SearchCriteria("orderStatus", "Like", search);
+		SearchCriteria seachCriteria = new SearchCriteria("fullName", "searchByName", search);
 
 		Specification<Order> where = null;
 

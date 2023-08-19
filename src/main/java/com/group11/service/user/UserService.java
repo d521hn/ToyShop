@@ -1,9 +1,12 @@
 package com.group11.service.user;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group11.dto.brand.BrandFormForUpdating;
+import com.group11.dto.user.UserFormForUpdating;
+import com.group11.entity.Brand;
 //import com.group11.dto.ChangePublicProfileDTO;
 import com.group11.entity.RegistrationUserToken;
 import com.group11.entity.ResetPasswordToken;
@@ -21,6 +27,8 @@ import com.group11.event.OnSendRegistrationUserConfirmViaEmailEvent;
 import com.group11.repository.RegistrationUserTokenRepository;
 import com.group11.repository.ResetPasswordTokenRepository;
 import com.group11.repository.UserRepository;
+import com.group11.specification.brand.BrandSpecificationBuilder;
+import com.group11.specification.user.UserSpecificationBuilder;
 
 @Component
 @Transactional
@@ -40,6 +48,13 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Override
+	public Page<User> getAllUsers(Pageable pageable, String search) {
+		UserSpecificationBuilder specification = new UserSpecificationBuilder(search);
+
+		return userRepository.findAll(specification.build(), pageable);
+	}
 
 	@Override
 	public void createUser(User user) {
@@ -56,6 +71,22 @@ public class UserService implements IUserService {
 		//lỗi ở phần sendConfirmEmail
 		// send email to confirm
 		sendConfirmUserRegistrationViaEmail(user.getEmail());
+	}
+	
+	@Override
+	public User getUserByID(short id) {
+		return userRepository.findById(id).get();
+	}
+	
+	@Override
+	public void updateUser(short id, UserFormForUpdating form) {
+		User entity = userRepository.findById(id).get();
+//		entity.setUserName(form.getUserName());
+//		entity.setEmail(form.getEmail());
+//		entity.setFirstName(form.getFirstName());
+//		entity.setLastName(form.getLastName());
+		entity.setRole(form.getRole());
+		userRepository.save(entity);
 	}
 
 	private void createNewRegistrationUserToken(User user) {
@@ -162,6 +193,11 @@ public class UserService implements IUserService {
 
 		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
 				AuthorityUtils.createAuthorityList(user.getRole()));
+	}
+	
+	@Transactional
+	public void deleteUsers(List<Short> ids) {
+		userRepository.deleteByIdIn(ids);
 	}
 
 //	@Override

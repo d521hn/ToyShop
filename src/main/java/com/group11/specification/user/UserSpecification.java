@@ -1,4 +1,4 @@
-package com.group11.specification.order;
+package com.group11.specification.user;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -7,25 +7,22 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.group11.entity.Order;
+import com.group11.entity.User;
 import com.group11.specification.SearchCriteria;
 
-public class OrderSpecification implements Specification<Order> {
+public class UserSpecification implements Specification<User> {
 	private static final long serialVersionUID = 1L;
 	private SearchCriteria criteria;
 
-	public OrderSpecification(SearchCriteria criteria) {
+	public UserSpecification(SearchCriteria criteria) {
 		this.criteria = criteria;
 	}
 
 	@Override
-	public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+	public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
 		if (criteria.getOperator().equalsIgnoreCase("Like")) {
 			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
-		}
-		if (criteria.getOperator().equalsIgnoreCase("searchByName")) {
-			return criteriaBuilder.like(root.get("user").get(criteria.getKey()), "%" + criteria.getValue() + "%");
 		}
 		return null;
 	}

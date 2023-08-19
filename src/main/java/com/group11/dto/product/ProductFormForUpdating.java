@@ -15,4 +15,6 @@ public class ProductFormForUpdating {
 	String status;
 	String ageGroup;
 	short quantity;
+	short brandId;
+	short cateId;
 }

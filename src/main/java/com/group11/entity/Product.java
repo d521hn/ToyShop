@@ -30,55 +30,55 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "`Product`")
-public class Product implements Serializable{
+public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private short id;
-	
-    @Column(name = "`name`", nullable = false, length = 200)
-    private String name;
-    
+
+	@Column(name = "`name`", nullable = false, length = 200)
+	private String name;
+
 	@Column(name = "`price`", nullable = false)
 	private int price;
-	
+
 	@Column(name = "`describe`", columnDefinition = "TEXT")
 	private String describe;
-	
+
 	@Column(name = "`info`", columnDefinition = "TEXT")
 	private String info;
-	
+
 	@Column(name = "`guide`", columnDefinition = "TEXT")
 	private String guide;
-	
-    @Column(name = "`img`", length = 200)
-    private String image;
-    
-    @Column(name = "`status`", length = 50)
-    private String status;
-    
+
+	@Column(name = "`img`", length = 200)
+	private String image;
+
+	@Column(name = "`status`", length = 50)
+	private String status;
+
 	@Column(name = "`quantity`", nullable = false)
 	private short quantity;
-	
-    @Column(name = "`ageGroup`", length = 50)
-    private String ageGroup;
-	
+
+	@Column(name = "`ageGroup`", length = 50)
+	private String ageGroup;
+
 	@ManyToOne
 	@JoinColumn(name = "cateId", referencedColumnName = "id", nullable = false)
 	private Category cate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "brandId", referencedColumnName = "id", nullable = false)
 	private Brand brand;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "promotionId", referencedColumnName = "id", nullable = true)
 	private Promotion promotion;
 
 	public Product(String name, int price, String describe, String info, String guide, String image, String status,
-			short quantity, String ageGroup) {
+			short quantity, String ageGroup, short brandId, short cateId) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -89,6 +89,10 @@ public class Product implements Serializable{
 		this.status = status;
 		this.quantity = quantity;
 		this.ageGroup = ageGroup;
+		this.brand = new Brand();
+		this.brand.setId(brandId);
+		this.cate = new Category();
+		this.cate.setId(cateId);
 	}
-	
+
 }
