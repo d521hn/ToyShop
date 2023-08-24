@@ -2,6 +2,7 @@ package com.group11.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -35,6 +36,7 @@ public class ProductOrder implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "orderId", insertable = false, updatable = false)
+    @JsonBackReference
     private Order order;
 
     @Column(name = "quantity")

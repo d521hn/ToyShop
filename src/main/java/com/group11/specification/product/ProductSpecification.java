@@ -30,6 +30,9 @@ public class ProductSpecification  implements Specification<Product> {
 		if (criteria.getOperator().equalsIgnoreCase("filterByBrand")) {
 			return criteriaBuilder.like(root.get("brand").get(criteria.getKey()), "%" + criteria.getValue() + "%");
 		}
+		if (criteria.getOperator().equalsIgnoreCase("filterByCate")) {
+			return criteriaBuilder.like(root.get("cate").get(criteria.getKey()), "%" + criteria.getValue() + "%");
+		}
 		if (criteria.getOperator().equalsIgnoreCase("filterMinPrice")) {
 			return criteriaBuilder.greaterThanOrEqualTo(root.get(criteria.getKey()), criteria.getValue().toString());
 		}

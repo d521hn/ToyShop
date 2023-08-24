@@ -1,5 +1,7 @@
 package com.group11.specification.order;
 
+import java.util.Date;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -20,13 +22,22 @@ public class OrderSpecification implements Specification<Order> {
 
 	@Override
 	public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-
+		Predicate predicate = null;
 		if (criteria.getOperator().equalsIgnoreCase("Like")) {
 			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
 		}
 		if (criteria.getOperator().equalsIgnoreCase("searchByName")) {
 			return criteriaBuilder.like(root.get("user").get(criteria.getKey()), "%" + criteria.getValue() + "%");
 		}
-		return null;
+        if (criteria.getOperator().equalsIgnoreCase("filterMinDate")) {
+            Date minDate = (Date) criteria.getValue();
+            predicate = criteriaBuilder.greaterThanOrEqualTo(root.get(criteria.getKey()), minDate);
+        }
+
+        if (criteria.getOperator().equalsIgnoreCase("filterMaxDate")) {
+            Date maxDate = (Date) criteria.getValue();
+            predicate = criteriaBuilder.lessThanOrEqualTo(root.get(criteria.getKey()), maxDate);
+        }
+		return predicate;
 	}
 }

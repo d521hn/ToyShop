@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.group11.dto.order.OrderFilter;
 import com.group11.dto.order.OrderFormForCreating;
 import com.group11.dto.order.OrderFormForUpdating;
 import com.group11.entity.Order;
 
 public interface IOrderService {
-	Page<Order> getAllOrders(Pageable pageable, String search);
+	Page<Order> getAllOrders(Pageable pageable, OrderFilter filter, String search);
 	
 	boolean isOrderExistsById(short id);
 

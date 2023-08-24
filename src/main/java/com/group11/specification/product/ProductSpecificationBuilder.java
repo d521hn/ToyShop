@@ -37,6 +37,11 @@ public class ProductSpecificationBuilder {
 	            where = where.or(new ProductSpecification(brandCriteria));
 	        }
 	    }
+	    
+	    if (filter.getCate() != null) {
+	        SearchCriteria cate = new SearchCriteria("name", "filterByCate", filter.getCate());
+	        where = where.and(new ProductSpecification(cate));
+	    }
 
 	    if (filter.getAgeGroup() != null) {
 	        SearchCriteria ageGroup = new SearchCriteria("ageGroup", "filterByAgeGroup", filter.getAgeGroup());

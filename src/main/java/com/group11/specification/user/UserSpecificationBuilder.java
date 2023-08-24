@@ -16,7 +16,7 @@ public class UserSpecificationBuilder {
 	@SuppressWarnings("deprecation")
 	public Specification<User> build() {
 
-		SearchCriteria seachCriteria = new SearchCriteria("name", "Like", search);
+		SearchCriteria seachCriteria = new SearchCriteria("fullName", "Like", search);
 
 		Specification<User> where = null;
 

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group11.dto.order.OrderFilter;
 import com.group11.dto.order.OrderFormForCreating;
 import com.group11.dto.order.OrderFormForUpdating;
 import com.group11.entity.Order;
@@ -20,8 +21,8 @@ public class OrderService implements IOrderService {
 	private IOrderRepository repository;
 	
 	@Override
-	public Page<Order> getAllOrders(Pageable pageable, String search) {
-		OrderSpecificationBuilder specification = new OrderSpecificationBuilder(search);
+	public Page<Order> getAllOrders(Pageable pageable, OrderFilter filter,  String search) {
+		OrderSpecificationBuilder specification = new OrderSpecificationBuilder(filter, search);
 
 		return repository.findAll(specification.build(), pageable);
 	}

@@ -47,7 +47,6 @@ public class CategoryController {
 		return new ResponseEntity<>(service.isCategoryExistsByName(name), HttpStatus.OK);
 	}
 
-
 	@PostMapping()
 	public ResponseEntity<?> createCategory(@RequestBody CategoryFormForCreating form) {
 		service.createCategory(form);

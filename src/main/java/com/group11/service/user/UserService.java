@@ -48,7 +48,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	public Page<User> getAllUsers(Pageable pageable, String search) {
 		UserSpecificationBuilder specification = new UserSpecificationBuilder(search);
@@ -68,16 +68,16 @@ public class UserService implements IUserService {
 		// create new user registration token
 		createNewRegistrationUserToken(user);
 
-		//lỗi ở phần sendConfirmEmail
+		// lỗi ở phần sendConfirmEmail
 		// send email to confirm
 		sendConfirmUserRegistrationViaEmail(user.getEmail());
 	}
-	
+
 	@Override
 	public User getUserByID(short id) {
 		return userRepository.findById(id).get();
 	}
-	
+
 	@Override
 	public void updateUser(short id, UserFormForUpdating form) {
 		User entity = userRepository.findById(id).get();
@@ -194,7 +194,7 @@ public class UserService implements IUserService {
 		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
 				AuthorityUtils.createAuthorityList(user.getRole()));
 	}
-	
+
 	@Transactional
 	public void deleteUsers(List<Short> ids) {
 		userRepository.deleteByIdIn(ids);

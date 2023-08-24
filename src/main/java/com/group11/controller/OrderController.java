@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group11.dto.order.OrderFilter;
 import com.group11.dto.order.OrderFormForCreating;
 import com.group11.dto.order.OrderFormForUpdating;
 import com.group11.entity.Order;
@@ -31,9 +32,10 @@ public class OrderController {
 	@GetMapping()
 	public ResponseEntity<?> getAllOrders(
 			Pageable pageable,
+			OrderFilter filter,
 			@RequestParam(required = false)
 			String search) {
-		Page<Order> entities = service.getAllOrders(pageable, search);
+		Page<Order> entities = service.getAllOrders(pageable, filter, search);
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 
