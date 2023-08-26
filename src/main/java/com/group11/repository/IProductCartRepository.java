@@ -23,5 +23,9 @@ public interface IProductCartRepository extends JpaRepository<ProductCart, Short
 	@Modifying
 	@Query(value = "DELETE FROM PRODUCT_CART p WHERE p.productId = :productId AND p.cartId = :cartId", nativeQuery = true)
 	public void deleteById(short productId, short cartId);
+	
+	@Modifying
+	@Query(value = "DELETE FROM PRODUCT_CART p WHERE p.cartId = :cartId", nativeQuery = true)
+	public void deleteAllByCartId(short cartId);
 
 }

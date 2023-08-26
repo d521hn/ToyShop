@@ -93,7 +93,7 @@ public class Order implements Serializable{
 		this.ship.setId(shipId);
 	}
 
-	public Order(short shipId, short userId, String orderStatus, Date createdTime, PaymentMethod paymentMethod, String paymentStatus) {
+	public Order(short userId, short shipId, String orderStatus, Date createdTime, PaymentMethod paymentMethod, String paymentStatus) {
 		super();
 		setUserId(userId);
 		setShipId(shipId);

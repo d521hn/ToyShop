@@ -1,5 +1,9 @@
 package com.group11.specification.order;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
@@ -33,6 +37,7 @@ public class OrderSpecificationBuilder {
 			SearchCriteria minDate = new SearchCriteria("createdTime", "filterMinDate", filter.getMinDate());
 			where = where == null ? new OrderSpecification(minDate) : where.and(new OrderSpecification(minDate));
 		}
+
 
 		if (filter.getMaxDate() != null) {
 			SearchCriteria maxDate = new SearchCriteria("createdTime", "filterMaxDate", filter.getMaxDate());

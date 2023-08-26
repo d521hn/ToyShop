@@ -40,6 +40,9 @@ public class Product implements Serializable {
 
 	@Column(name = "`name`", nullable = false, length = 200)
 	private String name;
+	
+	@Column(name = "`importPrice`")
+	private int importPrice;
 
 	@Column(name = "`price`", nullable = false)
 	private int price;
@@ -77,10 +80,11 @@ public class Product implements Serializable {
 	@JoinColumn(name = "promotionId", referencedColumnName = "id", nullable = true)
 	private Promotion promotion;
 
-	public Product(String name, int price, String describe, String info, String guide, String image, String status,
+	public Product(String name, int importPrice, int price, String describe, String info, String guide, String image, String status,
 			short quantity, String ageGroup, short brandId, short cateId) {
 		super();
 		this.name = name;
+		this.importPrice = importPrice;
 		this.price = price;
 		this.describe = describe;
 		this.info = info;

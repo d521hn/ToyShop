@@ -10,6 +10,7 @@ import lombok.Setter;
 public class ProductFormForCreating {
 	String name;
 	int price;
+	int importPrice;
 	String describe;
 	String info;
 	String guide;
@@ -21,6 +22,6 @@ public class ProductFormForCreating {
 	short brandId;
 	
 	public Product toEntity() {
-		return new Product (name, price, describe, info, guide, image, status, quantity, ageGroup, cateId, brandId);
+		return new Product (name, importPrice, price, describe, info, guide, image, status, quantity, ageGroup, cateId, brandId);
 	}
 }

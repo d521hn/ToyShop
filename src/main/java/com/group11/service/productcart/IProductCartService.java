@@ -18,4 +18,6 @@ public interface IProductCartService {
 	void updateProductCart(short productId, short cartId, ProductCartFormForUpdating form);
 
 	void deleteProductCart(short productId, short cartId);
+	
+	void deleteAllProductCart(short cartId);
 }

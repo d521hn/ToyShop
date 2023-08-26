@@ -82,6 +82,16 @@ public class UserController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/findByUsername/{username}")
+	public ResponseEntity<?> findByUsername(@PathVariable(name = "username") String username) {
+		// get entity
+		User result = userService.findUserByUserName(username);
+
+		// return result
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> updateUser(@PathVariable(name = "id") short id, @RequestBody UserFormForUpdating form) {
 		userService.updateUser(id, form);

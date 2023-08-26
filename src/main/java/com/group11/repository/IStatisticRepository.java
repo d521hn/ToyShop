@@ -33,7 +33,7 @@ public interface IStatisticRepository extends JpaRepository<Order, Short>, JpaSp
 	public int getRevenue(short month, short year);
 	
 	@Query(value = 
-	        "SELECT SUM(po.quantity * po.price) - SUM(po.quantity * pr.price) "
+	        "SELECT SUM(po.quantity * po.price) - SUM(po.quantity * pr.importPrice) "
 	        + "FROM Product pr INNER JOIN PRODUCT_ORDER po "
 	        + "ON pr.id = po.productId "
 	        + "INNER JOIN `Order` o "

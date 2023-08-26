@@ -37,13 +37,23 @@ private static final long serialVersionUID = 1L;
     @Column(name = "`fullName`", nullable = false, length = 100)
     private String fullName;
     
-    @Column(name = "`email`", nullable = false, length = 100, unique = true)
+    @Column(name = "`email`", nullable = false, length = 100)
     private String email;
     
-    @Column(name = "`phoneNumber`", nullable = false, length = 12, unique = true)
+    @Column(name = "`phoneNumber`", nullable = false, length = 12)
     private String phoneNumber;
     
     @Column(name = "`address`", nullable = false, length = 100)
     private String address;
+
+	public Shipping(String fullName, String email, String phoneNumber, String address) {
+		super();
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
+    
+    
 
 }

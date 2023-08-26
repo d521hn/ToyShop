@@ -50,9 +50,15 @@ public class ProductCartController {
 		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
 	}
 	
+//	@DeleteMapping
+//	public ResponseEntity<?> deleteProductCart(@RequestParam(name = "productId") short productId, @RequestParam(name = "cartId") short cardId) {
+//		service.deleteProductCart(productId, cardId);
+//		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
+//	}
+	
 	@DeleteMapping
-	public ResponseEntity<?> deleteProductCart(@RequestParam(name = "productId") short productId, @RequestParam(name = "cartId") short cardId) {
-		service.deleteProductCart(productId, cardId);
+	public ResponseEntity<?> deleteAllProductCart(@RequestParam(name = "cartId") short cardId) {
+		service.deleteAllProductCart(cardId);
 		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
 	}
 

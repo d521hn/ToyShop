@@ -51,6 +51,13 @@ public class ProductCartService implements IProductCartService{
 		repository.deleteById(productId, cartId);
 	}
 	
+	@Transactional
+	@Override
+	public void deleteAllProductCart(short cartId) {
+		repository.deleteAllByCartId(cartId);
+	}
+	
+	
 //	@Override
 //	public void deleteProductCart(short productId, short cartId) {
 //	    int deletedRows = repository.deleteById(productId, cartId);
