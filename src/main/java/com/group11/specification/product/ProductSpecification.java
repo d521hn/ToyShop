@@ -22,7 +22,11 @@ public class ProductSpecification  implements Specification<Product> {
 	public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
 		if (criteria.getOperator().equalsIgnoreCase("searchByName")) {
-			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
+			return criteriaBuilder.or(
+					criteriaBuilder.like(root.get(criteria.getKey()), criteria.getValue() + " %"),
+					criteriaBuilder.like(root.get(criteria.getKey()), "% " + criteria.getValue() + " %"),
+					criteriaBuilder.like(root.get(criteria.getKey()), "% " + criteria.getValue())
+					);
 		}
 		if (criteria.getOperator().equalsIgnoreCase("filterByAgeGroup")) {
 			return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
